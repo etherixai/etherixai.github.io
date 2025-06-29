@@ -1,145 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EtherixAI - Download Your AI Assistant</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="stylesheet" href="style.css">
-  <script src="https://unpkg.com/scrollreveal"></script>
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="EtherixAI - Python Powered AI Assistant" />
+  <meta name="keywords" content="Jarvis, AI Assistant, Python AI, Etherix, Download Jarvis AI" />
+  <title>EtherixAI | Python Jarvis Assistant</title>
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"></script>
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
-<body>
+<body class="is-preload">
+  <div id="wrapper" class="fade-in">
+    <!-- Header -->
+    <header id="header">
+      <div class="inner">
+        <a href="#" class="logo">Etherix</a>
+        <nav>
+          <ul>
+            <li><a href="#" onclick="scrollToTop()">Home</a></li>
+            <li><a href="#footer">Contact Us</a></li>
+            <li id="cart-item"></li>
+            <li id="auth-button"></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
 
-  <!-- Header -->
-  <header>
-    <div class="logo">Etherix</div>
-    <nav>
-      <a href="#top" onclick="scrollToTop()">Home</a>
-      <a href="#footer">Contact</a>
-      <a id="cartBtn" href="#" onclick="openCart()">Cart</a>
-      <button id="loginBtn" onclick="handleLogin()">Login</button>
-    </nav>
-  </header>
+    <!-- Main -->
+    <div id="main">
+      <section class="post featured">
+        <header class="major">
+          <h2>Download Jarvis AI</h2>
+          <p>Built with Python, powered by AI, and designed for your PC</p>
+        </header>
+        <span class="image main">
+          <img src="images/jarvis-preview.jpg" alt="Jarvis Preview" />
+        </span>
+        <ul class="actions special">
+          <li>
+            <button id="downloadBtn" class="button primary">Download Now</button>
+          </li>
+        </ul>
+      </section>
+    </div>
 
-  <!-- Main Content -->
-  <section id="top" class="hero">
-    <h1>Download Etherix AI Assistant</h1>
-    <p>Powerful desktop AI powered by Python</p>
-    <button id="downloadBtn" onclick="handlePurchase()">Download Now</button>
-  </section>
+    <!-- Footer Icons -->
+    <div style="display: flex; justify-content: center; gap: 20px; padding: 20px; border-top: 1px solid #ddd;">
+      <a href="https://t.me/EtherixAI" target="_blank"><img src="assets/icons/telegram.svg" width="30" /></a>
+      <a href="tel:+916260698966"><img src="assets/icons/phone.svg" width="30" /></a>
+      <a href="https://wa.me/916260698966" target="_blank"><img src="assets/icons/whatsapp.svg" width="30" /></a>
+    </div>
 
-  <!-- Footer -->
-  <div class="contact-bar">
-    <a href="https://t.me/EtherixAI" target="_blank"><i class="fab fa-telegram"></i></a>
-    <a href="tel:+916260698966"><i class="fas fa-phone"></i></a>
-    <a href="https://wa.me/916260698966" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    <!-- Footer Info -->
+    <footer id="footer">
+      <section>
+        <h3>Privacy & Terms</h3>
+        <p>This website uses Firebase for user authentication and secure payment validation via Razorpay.</p>
+        <p>&copy; 2025 EtherixAI. All rights reserved.</p>
+      </section>
+    </footer>
   </div>
 
-  <footer id="footer">
-    <p>&copy; 2025 Etherix AI. All Rights Reserved.</p>
-    <a href="#">Privacy Policy</a>
-  </footer>
-
-  <!-- Firebase & Razorpay Script -->
+  <script src="assets/js/util.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/auth.js"></script>
+  <script src="assets/js/payment.js"></script>
   <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyA44SNXedI52T1GIftDgBGRw4RQscj2hgY",
-      authDomain: "etherixai.firebaseapp.com",
-      projectId: "etherixai",
-      storageBucket: "etherixai.appspot.com",
-      messagingSenderId: "1080577712222",
-      appId: "1:1080577712222:web:c7a9ab151b379afe73d4cf",
-      measurementId: "G-PZ0CZ7B7FE"
-    };
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-    const db = firebase.firestore();
-
-    let currentUser = null;
-
-    function handleLogin() {
-      const provider = new firebase.auth.GoogleAuthProvider();
-      auth.signInWithPopup(provider).then((result) => {
-        currentUser = result.user;
-        document.getElementById("loginBtn").innerText = "Logout";
-        checkPurchase();
-      });
-    }
-
-    document.getElementById("loginBtn").addEventListener("click", () => {
-      if (auth.currentUser) {
-        auth.signOut();
-        location.reload();
-      } else {
-        handleLogin();
-      }
-    });
-
-    function checkPurchase() {
-      if (!auth.currentUser) return;
-      const uid = auth.currentUser.uid;
-      db.collection("users").doc(uid).get().then((doc) => {
-        if (doc.exists && doc.data().paid) {
-          document.getElementById("downloadBtn").onclick = () => {
-            window.location.href = "https://drive.google.com/uc?export=download&id=1C7a6RtvAAENc9Z-Qio6bNQTgfKGGDgGF";
-          };
-          document.getElementById("cartBtn").innerText = "Download File";
-        } else {
-          document.getElementById("cartBtn").innerText = "Add Item";
-        }
-      });
-    }
-
-    function handlePurchase() {
-      if (!auth.currentUser) {
-        alert("Please login first.");
-        return;
-      }
-
-      const options = {
-        key: "rzp_live_D6UqLXKN5dK5YW",
-        amount: 49900,
-        currency: "INR",
-        name: "EtherixAI",
-        description: "Jarvis AI Full Package",
-        handler: function (response) {
-          db.collection("users").doc(auth.currentUser.uid).set({
-            paid: true,
-            razorpay_payment_id: response.razorpay_payment_id,
-            email: auth.currentUser.email
-          }).then(() => {
-            alert("Payment successful! Download unlocked.");
-            checkPurchase();
-          });
-        },
-        prefill: {
-          email: auth.currentUser.email
-        }
-      };
-      const rzp = new Razorpay(options);
-      rzp.open();
-    }
-
     function scrollToTop() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-
-    function openCart() {
-      checkPurchase();
-    }
-
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        currentUser = user;
-        document.getElementById("loginBtn").innerText = "Logout";
-        checkPurchase();
-      }
-    });
   </script>
 </body>
 </html>
