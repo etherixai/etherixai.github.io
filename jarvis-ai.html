@@ -1,101 +1,100 @@
 <!DOCTYPE HTML>
-<!--
-	Hielo by TEMPLATED (Modified for Jarvis AI Product Page)
-	templated.co @templatedco
-	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
--->
 <html>
 <head>
     <title>Jarvis AI - Etherix</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="assets/css/main.css">
-    <!-- Font Awesome (this is important for icons) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     
-    <!-- Custom CSS for Product Page -->
+    <!-- Custom CSS for the new professional layout -->
     <style>
-        /* CHANGE #1: Set a dark background for the whole page to keep header visible */
-        body.subpage {
-            background: #1d242a; 
-        }
-
-        #product-box {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-            padding: 3em 2em;
-            background: #2a343f;
-            border-radius: 8px;
-        }
-        #product-box img {
-            max-width: 100%;
-            border-radius: 8px;
-            margin-bottom: 2em;
-        }
-        #product-box p {
-            color: rgba(255, 255, 255, 0.85); /* Bright, readable white text */
-            font-size: 1.1em;
-        }
-        #purchaseBtn {
-            font-size: 1.2em;
-            padding: 0.8em 2em;
-        }
-        #statusMessage {
-            margin-top: 1em;
-            font-weight: bold;
-            min-height: 24px;
-        }
+        body.subpage { background: #1d242a; }
+        .product-hero { text-align: center; margin-bottom: 2em; }
+        .product-hero h2 { margin-bottom: 0.5em; }
+        .product-hero img { border-radius: 8px; max-width: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); grid-gap: 2em; text-align: center; margin: 3em 0; }
+        .feature-item i { font-size: 2.5em; color: #3399cc; margin-bottom: 0.5em; }
+        .feature-item h4 { margin-bottom: 0.5em; }
+        .gallery { display: grid; grid-template-columns: repeat(3, 1fr); grid-gap: 1em; margin-top: 3em; }
+        .gallery img { width: 100%; border-radius: 5px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .purchase-box { background: #2a343f; padding: 2em; border-radius: 8px; text-align: center; }
+        .purchase-box .price { font-size: 2em; color: #fff; font-weight: bold; margin-bottom: 1em; }
+        .purchase-box #purchaseBtn { font-size: 1.2em; padding: 0.8em 2em; }
     </style>
 </head>
 <body class="subpage">
 
     <!-- Header -->
-    <header id="header" class="alt">
-        <div class="logo"><a href="index.html">Etherix</a></div>
-        <a href="#menu">Menu</a>
-    </header>
+    <header id="header" class="alt"><div class="logo"><a href="index.html">Etherix</a></div><a href="#menu">Menu</a></header>
 
     <!-- Nav -->
     <nav id="menu">
         <ul class="links">
-    		<li><a href="index.html">Home</a></li>
-    		<li><a href="jarvis-ai.html">Jarvis AI</a></li>
-    
-    		<!-- This will show the user's email when logged in -->
-    		<li class="nav-user"><span id="user-email-display"></span></li>
-
-		    <!-- This is the original Login link -->
-		    <li class="nav-login"><a href="login.html">Login/Register</a></li>
-    
-		    <!-- This is the new Logout link -->
-		    <li class="nav-logout"><a href="#" id="logout-btn">Logout</a></li>
-		</ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="jarvis-ai.html">Jarvis AI</a></li>
+            <li class="nav-user"><span id="user-email-display"></span></li>
+            <li class="nav-login"><a href="login.html">Login/Register</a></li>
+            <li class="nav-logout"><a href="#" id="logout-btn">Logout</a></li>
+        </ul>
     </nav>
 
     <!-- Main Product Section -->
     <section id="main" class="wrapper">
         <div class="inner">
-            <div id="product-box">
-                <header class="align-center">
-                    <h2>Jarvis AI - Your Personal Voice Assistant</h2>
-                </header>
-                
-                <img src="images/pic01.jpg" alt="Jarvis AI Product Image">
-                
-                <p><strong>Description:</strong> Jarvis AI is your personal voice assistant powered by Python and advanced automation. Command, control, and create – effortlessly.</p>
-                <p><strong>Price:</strong> ₹499</p>
-                
-                <button id="purchaseBtn" class="button">Loading...</button>
-                <p id="statusMessage"></p>
+
+            <!-- Hero Section -->
+            <div class="product-hero">
+                <h2>Jarvis AI - Your Personal Voice Assistant</h2>
+                <p>Command, control, and create – effortlessly with the power of Python.</p>
+                <!-- ORIGINAL IMAGE 1: pic01.jpg -->
+                <img src="images/pic01.jpg" alt="Jarvis AI Product Showcase">
             </div>
+
+            <!-- Features Section -->
+            <div class="features">
+                <div class="feature-item">
+                    <i class="fas fa-robot"></i>
+                    <h4>Voice Control</h4>
+                    <p>Control your desktop, open apps, and perform tasks with just your voice.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-cogs"></i>
+                    <h4>Advanced Automation</h4>
+                    <p>Automate repetitive tasks, from sending emails to managing files.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fab fa-python"></i>
+                    <h4>Python Powered</h4>
+                    <p>Built on a robust and flexible Python foundation, ready for customization.</p>
+                </div>
+            </div>
+
+            <!-- Image Gallery Section -->
+            <hr>
+            <h3 style="text-align:center; margin-top:2em;">See It In Action</h3>
+            <div class="gallery">
+                <!-- ORIGINAL IMAGES 2, 3, AND 4 -->
+                <img src="images/pic02.jpg" alt="Jarvis UI">
+                <img src="images/pic03.jpg" alt="Jarvis Automation">
+                <img src="images/pic04.jpg" alt="Jarvis Desktop">
+            </div>
+
+            <!-- Purchase Section -->
+            <hr>
+            <div class="purchase-box" style="margin-top:3em;">
+                <h3>Get Source Code</h3>
+                <div class="price">₹499</div>
+                <button id="purchaseBtn" class="button">Loading...</button>
+                <p id="statusMessage" style="margin-top:1em;"></p>
+            </div>
+
         </div>
     </section>
 
     <!-- Footer -->
     <footer id="footer">
          <div class="container">
-            <!-- CHANGE #2: Correctly structured Font Awesome icons -->
             <ul class="icons">
                 <li><a href="https://t.me/EtherixAI" class="icon" target="_blank"><i class="fab fa-telegram-plane"></i><span class="label">Telegram</span></a></li>
                 <li><a href="https://wa.me/916260698966" class="icon" target="_blank"><i class="fab fa-whatsapp"></i><span class="label">WhatsApp</span></a></li>
@@ -103,7 +102,7 @@
             </ul>
         </div>
     </footer>
-        <div class="copyright">
+    <div class="copyright">
         © 2025 Etherix. All rights reserved. <br>
         <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a>
     </div>
@@ -118,8 +117,8 @@
     <script src="assets/js/skel.min.js"></script>
     <script src="assets/js/util.js"></script>
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/global.js"></script>
     <script src="assets/js/product.js"></script>
-	<script src="assets/js/global.js"></script>
 
 </body>
 </html>
