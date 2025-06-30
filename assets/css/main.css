@@ -3950,7 +3950,6 @@
 			right: 0;
 			text-align: right;
 			top: 0;
-			vertical-align: middle;
 			width: 7rem;
 		}
 
@@ -4320,4 +4319,30 @@
 				padding: 3rem 0 1rem 0 ;
 			}
 
+		}
+		/* By default, hide the elements that are for logged-in users */
+		.nav-user,
+		.nav-logout {
+		    display: none;
+		}
+
+		/* When the user is logged in, the body will have a class 'user-is-logged-in' */
+		/* So, we show the logged-in elements */
+		body.user-is-logged-in .nav-user,
+		body.user-is-logged-in .nav-logout {
+		    display: block;
+		}
+
+		/* And hide the login link */
+		body.user-is-logged-in .nav-login {
+		    display: none;
+		}
+
+		/* Style for displaying user's email in the menu */
+		.nav-user span {
+		    padding: 1em 1.5em;
+		    display: block;
+		    color: rgba(255, 255, 255, 0.5); /* Faded color */
+		    font-weight: bold;
+		    cursor: default; /* Make it look like non-clickable text */
 		}
