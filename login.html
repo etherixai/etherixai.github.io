@@ -1,0 +1,133 @@
+<!DOCTYPE HTML>
+<!--
+	Hielo by TEMPLATED (Modified for EtherixAI Login)
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+<head>
+    <title>Login/Register - EtherixAI</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <!-- Custom CSS for Login Form -->
+    <style>
+        #login-form-container {
+            padding: 4em 0;
+            background: #212931; /* Dark background to match theme */
+            color: #ffffff;
+        }
+        .login-box {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 2em;
+            background: #2a343f;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .login-box h2 {
+            text-align: center;
+            margin-bottom: 1.5em;
+        }
+        .login-box input[type="email"], .login-box input[type="password"] {
+            width: 100%;
+            padding: 1em;
+            margin-bottom: 1em;
+            border: 1px solid #444;
+            background: #333d49;
+            color: #fff;
+            border-radius: 4px;
+        }
+        .login-box .button {
+            width: 100%;
+            margin-bottom: 1em;
+        }
+        .google-btn {
+            background-color: #db4437;
+            color: white !important;
+        }
+        .google-btn:hover {
+            background-color: #e57368 !important;
+        }
+        #message {
+            text-align: center;
+            margin-top: 1em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="subpage">
+
+    <!-- Header -->
+    <header id="header" class="alt">
+        <div class="logo"><a href="index.html">Etherix</a></div>
+        <a href="#menu">Menu</a>
+    </header>
+
+    <!-- Nav -->
+    <nav id="menu">
+        <ul class="links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="login.html">Login/Register</a></li>
+            <li><a href="jarvis-ai.html">Jarvis AI</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Login/Register Section -->
+    <section id="login-form-container" class="wrapper style2">
+        <div class="inner">
+            <div class="login-box">
+                <h2>Access Your Account</h2>
+                
+                <input type="email" id="email" placeholder="Email Address">
+                <input type="password" id="password" placeholder="Password">
+
+                <button id="loginBtn" class="button">Login</button>
+                <button id="registerBtn" class="button alt">Register</button>
+                
+                <hr>
+                
+                <button id="googleSignInBtn" class="button google-btn">
+                    <i class="fab fa-google"></i> Sign In with Google
+                </button>
+
+                <p id="message"></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="container">
+            <ul class="icons">
+                <li><a href="https://t.me/EtherixAI" class="icon fab fa-telegram-plane" target="_blank"><span class="label">Telegram</span></a></li>
+                <li><a href="https://wa.me/916260698966" class="icon fab fa-whatsapp" target="_blank"><span class="label">WhatsApp</span></a></li>
+                <li><a href="tel:+916260698966" class="icon fas fa-phone-alt"><span class="label">Phone</span></a></li>
+            </ul>
+        </div>
+    </footer>
+        <div class="copyright">
+        © 2025 Etherix. All rights reserved. <br>
+        <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a>
+    </div>
+
+    <!-- Firebase Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+
+    <!-- Main JS Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/skel.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+
+    <!-- Custom Auth Script -->
+    <script src="assets/js/auth.js"></script>
+
+</body>
+</html>

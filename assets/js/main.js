@@ -1,176 +1,315 @@
 /*
-	Massively by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+	Hielo by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
 */
+
+var settings = {
+
+	banner: {
+
+		// Indicators (= the clickable dots at the bottom).
+			indicators: true,
+
+		// Transition speed (in ms)
+		// For timing purposes only. It *must* match the transition speed of "#banner > article".
+			speed: 1500,
+
+		// Transition delay (in ms)
+			delay: 5000,
+
+		// Parallax intensity (between 0 and 1; higher = more intense, lower = less intense; 0 = off)
+			parallax: 0.25
+
+	}
+
+};
 
 (function($) {
 
-	var $window = $(window),
-		$body = $('body'),
-		$wrapper = $('#wrapper'),
-		$header = $('#header'),
-		$nav = $('#nav'),
-		$main = $('#main'),
-		$navPanelToggle, $navPanel, $navPanelInner;
-
-	// Breakpoints.
-	breakpoints({
-		default:   ['1681px',   null       ],
-		xlarge:    ['1281px',   '1680px'   ],
-		large:     ['981px',    '1280px'   ],
-		medium:    ['737px',    '980px'    ],
-		small:     ['481px',    '736px'    ],
-		xsmall:    ['361px',    '480px'    ],
-		xxsmall:   [null,       '360px'    ]
+	skel.breakpoints({
+		xlarge:	'(max-width: 1680px)',
+		large:	'(max-width: 1280px)',
+		medium:	'(max-width: 980px)',
+		small:	'(max-width: 736px)',
+		xsmall:	'(max-width: 480px)'
 	});
 
-	// Firebase Setup
-	const firebaseConfig = {
-		apiKey: "AIzaSyA44SNXedI52T1GIftDgBGRw4RQscj2hgY",
-		authDomain: "etherixai.firebaseapp.com",
-		projectId: "etherixai",
-		storageBucket: "etherixai.firebasestorage.app",
-		messagingSenderId: "1080577712222",
-		appId: "1:1080577712222:web:c7a9ab151b379afe73d4cf",
-		measurementId: "G-PZ0CZ7B7FE"
+	/**
+	 * Applies parallax scrolling to an element's background image.
+	 * @return {jQuery} jQuery object.
+	 */
+	$.fn._parallax = (skel.vars.browser == 'ie' || skel.vars.mobile) ? function() { return $(this) } : function(intensity) {
+
+		var	$window = $(window),
+			$this = $(this);
+
+		if (this.length == 0 || intensity === 0)
+			return $this;
+
+		if (this.length > 1) {
+
+			for (var i=0; i < this.length; i++)
+				$(this[i])._parallax(intensity);
+
+			return $this;
+
+		}
+
+		if (!intensity)
+			intensity = 0.25;
+
+		$this.each(function() {
+
+			var $t = $(this),
+				on, off;
+
+			on = function() {
+
+				$t.css('background-position', 'center 100%, center 100%, center 0px');
+
+				$window
+					.on('scroll._parallax', function() {
+
+						var pos = parseInt($window.scrollTop()) - parseInt($t.position().top);
+
+						$t.css('background-position', 'center ' + (pos * (-1 * intensity)) + 'px');
+
+					});
+
+			};
+
+			off = function() {
+
+				$t
+					.css('background-position', '');
+
+				$window
+					.off('scroll._parallax');
+
+			};
+
+			skel.on('change', function() {
+
+				if (skel.breakpoint('medium').active)
+					(off)();
+				else
+					(on)();
+
+			});
+
+		});
+
+		$window
+			.off('load._parallax resize._parallax')
+			.on('load._parallax resize._parallax', function() {
+				$window.trigger('scroll');
+			});
+
+		return $(this);
+
 	};
 
-	firebase.initializeApp(firebaseConfig);
-	const auth = firebase.auth();
+	/**
+	 * Custom banner slider for Slate.
+	 * @return {jQuery} jQuery object.
+	 */
+	$.fn._slider = function(options) {
 
-	window.registerUser = function() {
-		const email = document.getElementById("register-email").value;
-		const password = document.getElementById("register-password").value;
+		var	$window = $(window),
+			$this = $(this);
 
-		auth.createUserWithEmailAndPassword(email, password)
-			.then((userCredential) => {
-				alert("Registered Successfully!");
-				console.log("User:", userCredential.user);
-			})
-			.catch((error) => {
-				alert(error.message);
-			});
-	}
+		if (this.length == 0)
+			return $this;
 
-	window.loginUser = function() {
-		const email = document.getElementById("login-email").value;
-		const password = document.getElementById("login-password").value;
+		if (this.length > 1) {
 
-		auth.signInWithEmailAndPassword(email, password)
-			.then((userCredential) => {
-				alert("Login Successful!");
-				console.log("User:", userCredential.user);
-			})
-			.catch((error) => {
-				alert(error.message);
-			});
-	}
+			for (var i=0; i < this.length; i++)
+				$(this[i])._slider(options);
 
-	// Play initial animations on page load.
-	$window.on('load', function() {
-		window.setTimeout(function() {
-			$body.removeClass('is-preload');
-		}, 100);
-	});
+			return $this;
 
-	// Scrolly.
-	$('.scrolly').scrolly();
-
-	// Background.
-	$wrapper._parallax(0.925);
-
-	// Nav Panel.
-	$navPanelToggle = $(
-		'<a href="#navPanel" id="navPanelToggle">Menu</a>'
-	).appendTo($wrapper);
-
-	$header.scrollex({
-		bottom: '5vh',
-		enter: function() {
-			$navPanelToggle.removeClass('alt');
-		},
-		leave: function() {
-			$navPanelToggle.addClass('alt');
-		}
-	});
-
-	$navPanel = $(
-		'<div id="navPanel">' +
-			'<nav></nav>' +
-			'<a href="#navPanel" class="close"></a>' +
-		'</div>'
-	).appendTo($body)
-		.panel({
-			delay: 500,
-			hideOnClick: true,
-			hideOnSwipe: true,
-			resetScroll: true,
-			resetForms: true,
-			side: 'right',
-			target: $body,
-			visibleClass: 'is-navPanel-visible'
-		});
-
-	$navPanelInner = $navPanel.children('nav');
-
-	var $navContent = $nav.children();
-
-	breakpoints.on('>medium', function() {
-		$navContent.appendTo($nav);
-		$nav.find('.icons, .icon').removeClass('alt');
-	});
-
-	breakpoints.on('<=medium', function() {
-		$navContent.appendTo($navPanelInner);
-		$navPanelInner.find('.icons, .icon').addClass('alt');
-	});
-
-	if (browser.os == 'wp' && browser.osVersion < 10)
-		$navPanel.css('transition', 'none');
-
-	var $intro = $('#intro');
-
-	if ($intro.length > 0) {
-		if (browser.name == 'ie') {
-			$window.on('resize.ie-intro-fix', function() {
-				var h = $intro.height();
-				if (h > $window.height())
-					$intro.css('height', 'auto');
-				else
-					$intro.css('height', h);
-			}).trigger('resize.ie-intro-fix');
 		}
 
-		breakpoints.on('>small', function() {
-			$main.unscrollex();
-			$main.scrollex({
-				mode: 'bottom',
-				top: '25vh',
-				bottom: '-50vh',
-				enter: function() {
-					$intro.addClass('hidden');
-				},
-				leave: function() {
-					$intro.removeClass('hidden');
-				}
-			});
-		});
+		// Vars.
+			var	current = 0, pos = 0, lastPos = 0,
+				slides = [], indicators = [],
+				$indicators,
+				$slides = $this.children('article'),
+				intervalId,
+				isLocked = false,
+				i = 0;
 
-		breakpoints.on('<=small', function() {
-			$main.unscrollex();
-			$main.scrollex({
-				mode: 'middle',
-				top: '15vh',
-				bottom: '-15vh',
-				enter: function() {
-					$intro.addClass('hidden');
-				},
-				leave: function() {
-					$intro.removeClass('hidden');
-				}
+		// Turn off indicators if we only have one slide.
+			if ($slides.length == 1)
+				options.indicators = false;
+
+		// Functions.
+			$this._switchTo = function(x, stop) {
+
+				if (isLocked || pos == x)
+					return;
+
+				isLocked = true;
+
+				if (stop)
+					window.clearInterval(intervalId);
+
+				// Update positions.
+					lastPos = pos;
+					pos = x;
+
+				// Hide last slide.
+					slides[lastPos].removeClass('top');
+
+					if (options.indicators)
+						indicators[lastPos].removeClass('visible');
+
+				// Show new slide.
+					slides[pos].addClass('visible').addClass('top');
+
+					if (options.indicators)
+						indicators[pos].addClass('visible');
+
+				// Finish hiding last slide after a short delay.
+					window.setTimeout(function() {
+
+						slides[lastPos].addClass('instant').removeClass('visible');
+
+						window.setTimeout(function() {
+
+							slides[lastPos].removeClass('instant');
+							isLocked = false;
+
+						}, 100);
+
+					}, options.speed);
+
+			};
+
+		// Indicators.
+			if (options.indicators)
+				$indicators = $('<ul class="indicators"></ul>').appendTo($this);
+
+		// Slides.
+			$slides
+				.each(function() {
+
+					var $slide = $(this),
+						$img = $slide.find('img');
+
+					// Slide.
+						$slide
+							.css('background-image', 'url("' + $img.attr('src') + '")')
+							.css('background-position', ($slide.data('position') ? $slide.data('position') : 'center'));
+
+					// Add to slides.
+						slides.push($slide);
+
+					// Indicators.
+						if (options.indicators) {
+
+							var $indicator_li = $('<li>' + i + '</li>').appendTo($indicators);
+
+							// Indicator.
+								$indicator_li
+									.data('index', i)
+									.on('click', function() {
+										$this._switchTo($(this).data('index'), true);
+									});
+
+							// Add to indicators.
+								indicators.push($indicator_li);
+
+						}
+
+					i++;
+
+				})
+				._parallax(options.parallax);
+
+		// Initial slide.
+			slides[pos].addClass('visible').addClass('top');
+
+			if (options.indicators)
+				indicators[pos].addClass('visible');
+
+		// Bail if we only have a single slide.
+			if (slides.length == 1)
+				return;
+
+		// Main loop.
+			intervalId = window.setInterval(function() {
+
+				current++;
+
+				if (current >= slides.length)
+					current = 0;
+
+				$this._switchTo(current);
+
+			}, options.delay);
+
+	};
+
+	$(function() {
+
+		var	$window 	= $(window),
+			$body 		= $('body'),
+			$header 	= $('#header'),
+			$banner 	= $('.banner');
+
+		// Disable animations/transitions until the page has loaded.
+			$body.addClass('is-loading');
+
+			$window.on('load', function() {
+				window.setTimeout(function() {
+					$body.removeClass('is-loading');
+				}, 100);
 			});
-		});
-	}
+
+		// Prioritize "important" elements on medium.
+			skel.on('+medium -medium', function() {
+				$.prioritize(
+					'.important\\28 medium\\29',
+					skel.breakpoint('medium').active
+				);
+			});
+
+		// Banner.
+			$banner._slider(settings.banner);
+
+		// Menu.
+			$('#menu')
+				.append('<a href="#menu" class="close"></a>')
+				.appendTo($body)
+				.panel({
+					delay: 500,
+					hideOnClick: true,
+					hideOnSwipe: true,
+					resetScroll: true,
+					resetForms: true,
+					side: 'right'
+				});
+
+		// Header.
+			if (skel.vars.IEVersion < 9)
+				$header.removeClass('alt');
+
+			if ($banner.length > 0
+			&&	$header.hasClass('alt')) {
+
+				$window.on('resize', function() { $window.trigger('scroll'); });
+
+				$banner.scrollex({
+					bottom:		$header.outerHeight(),
+					terminate:	function() { $header.removeClass('alt'); },
+					enter:		function() { $header.addClass('alt'); },
+					leave:		function() { $header.removeClass('alt'); $header.addClass('reveal'); }
+				});
+
+			}
+
+	});
 
 })(jQuery);

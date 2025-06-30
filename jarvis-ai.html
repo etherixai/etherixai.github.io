@@ -1,0 +1,116 @@
+<!DOCTYPE HTML>
+<!--
+	Hielo by TEMPLATED (Modified for Jarvis AI Product Page)
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+<head>
+    <title>Jarvis AI - Etherix</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <!-- Font Awesome (this is important for icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <!-- Custom CSS for Product Page -->
+    <style>
+        /* CHANGE #1: Set a dark background for the whole page to keep header visible */
+        body.subpage {
+            background: #1d242a; 
+        }
+
+        #product-box {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 3em 2em;
+            background: #2a343f;
+            border-radius: 8px;
+        }
+        #product-box img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-bottom: 2em;
+        }
+        #product-box p {
+            color: rgba(255, 255, 255, 0.85); /* Bright, readable white text */
+            font-size: 1.1em;
+        }
+        #purchaseBtn {
+            font-size: 1.2em;
+            padding: 0.8em 2em;
+        }
+        #statusMessage {
+            margin-top: 1em;
+            font-weight: bold;
+            min-height: 24px;
+        }
+    </style>
+</head>
+<body class="subpage">
+
+    <!-- Header -->
+    <header id="header" class="alt">
+        <div class="logo"><a href="index.html">Etherix</a></div>
+        <a href="#menu">Menu</a>
+    </header>
+
+    <!-- Nav -->
+    <nav id="menu">
+        <ul class="links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="login.html">Login/Register</a></li>
+            <li><a href="jarvis-ai.html">Jarvis AI</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Product Section -->
+    <section id="main" class="wrapper">
+        <div class="inner">
+            <div id="product-box">
+                <header class="align-center">
+                    <h2>Jarvis AI - Your Personal Voice Assistant</h2>
+                </header>
+                
+                <img src="images/pic01.jpg" alt="Jarvis AI Product Image">
+                
+                <p><strong>Description:</strong> Jarvis AI is your personal voice assistant powered by Python and advanced automation. Command, control, and create – effortlessly.</p>
+                <p><strong>Price:</strong> ₹499</p>
+                
+                <button id="purchaseBtn" class="button">Loading...</button>
+                <p id="statusMessage"></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer">
+         <div class="container">
+            <!-- CHANGE #2: Correctly structured Font Awesome icons -->
+            <ul class="icons">
+                <li><a href="https://t.me/EtherixAI" class="icon" target="_blank"><i class="fab fa-telegram-plane"></i><span class="label">Telegram</span></a></li>
+                <li><a href="https://wa.me/916260698966" class="icon" target="_blank"><i class="fab fa-whatsapp"></i><span class="label">WhatsApp</span></a></li>
+                <li><a href="tel:+916260698966" class="icon"><i class="fas fa-phone-alt"></i><span class="label">Phone</span></a></li>
+            </ul>
+        </div>
+    </footer>
+        <div class="copyright">
+        © 2025 Etherix. All rights reserved. <br>
+        <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/skel.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/product.js"></script>
+
+</body>
+</html>
