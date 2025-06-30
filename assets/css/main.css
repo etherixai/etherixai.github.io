@@ -4346,30 +4346,35 @@
 		    font-weight: bold;
 		    cursor: default; /* Make it look like non-clickable text */
 		}
-			#coming-soon {
-		    padding: 3em 2em;
-		    background: #212931; /* Dark background to stand out */
-    		text-align: center;
-   			border-top: 1px solid #333;
-		    border-bottom: 1px solid #333;
-		}
+			/* === Custom CSS for "Coming Soon" Section (Corrected Version) === */
 
-		#coming-soon h2 {
-		    font-size: 2.5em;
-		    color: #ffffff;
-		    margin-bottom: 0.25em;
-		}
+#coming-soon {
+    text-align: center;
+    padding: 4em 0;
+    background-color: #2a343f; /* Matching a dark color from the theme */
+}
 
-		#coming-soon p {
-		    font-size: 1.2em;
-		    color: #3399cc; /* Use the theme's highlight color */
-		    text-transform: uppercase;
-		    letter-spacing: 2px;
-		    font-weight: bold;
-		}
+/* This specifically fixes the "box" issue on the brain icon */
+#coming-soon .icon.fas.fa-brain {
+    font-size: 5em;
+    color: #49bba3; /* Hielo theme's main green color */
+    background: none; /* Removes the box background */
+    border: none;    /* Removes the box border */
+    width: auto;
+    height: auto;
+    line-height: normal;
+    display: inline-block;
+    margin-bottom: 0.5em;
+}
 
-		#coming-soon .icon {
-		    font-size: 3em;
-		    color: rgba(255, 255, 255, 0.2);
-		    margin-bottom: 0.5em;
-		}
+#coming-soon h2 {
+    font-size: 2.5em;
+    color: #ffffff;
+}
+
+#coming-soon p {
+    font-size: 1.5em;
+    color: #9a9a9a;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
