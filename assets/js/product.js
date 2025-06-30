@@ -85,26 +85,45 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 7. Function to initiate Razorpay payment
     function initiatePayment(user) {
-        const options = {
-            key: "rzp_live_D6UqLXKN5dK5YW",
-            amount: 49900,
-            currency: "INR",
-            name: "Etherix AI",
-            description: "Jarvis AI Purchase",
-            handler: function (response) {
-                savePurchase(user, response.razorpay_payment_id);
-            },
-            prefill: {
-                name: user.displayName || "Valued Customer",
-                email: user.email,
-            },
-            theme: {
-                color: "#3399cc"
+    const options = {
+        key: "rzp_live_K1AYL22YAR9WCg", // <-- YAHAN PAR AAPKI NAYI LIVE KEY DAAL DI HAI
+        amount: 49900, // Amount in paise (499 * 100)
+        currency: "INR",
+        name: "Etherix AI",
+        description: "Jarvis AI Purchase",
+        handler: function (response) {
+            // This function runs after payment is successful
+            statusMessage.innerText = "Payment Successful! Saving details...";
+            statusMessage.style.color = 'lightgreen';
+            savePurchase(user, response.razorpay_payment_id);
+        },
+        prefill: {
+            name: user.displayName || "Valued Customer",
+            email: user.email,
+        },
+        theme: {
+            color: "#3399cc"
+        },
+        modal: {
+            ondismiss: function(){
+                // This function runs if the user closes the payment window
+                console.log('Payment window was closed by the user.');
+                statusMessage.innerText = "Payment was cancelled.";
+                statusMessage.style.color = "orange";
             }
-        };
-        const rzp = new Razorpay(options);
-        rzp.open();
-    }
+        }
+    };
+    
+    const rzp = new Razorpay(options);
+
+    rzp.on('payment.failed', function (response){
+        console.error("Payment Failed:", response.error);
+        statusMessage.innerText = "Payment Failed. Please try again or contact support. Reason: " + response.error.description;
+        statusMessage.style.color = 'pink';
+    });
+
+    rzp.open();
+}
 
     // 8. Function to save purchase details to Firestore
     function savePurchase(user, paymentId) {
